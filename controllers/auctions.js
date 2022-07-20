@@ -13,7 +13,8 @@ const addAuction = async (request, response) => {
         if(!auctionValidation.isAccepted) {
             return response.status(406).json({
                 success: auctionValidation.isAccepted,
-                message: auctionValidation.message
+                message: auctionValidation.message,
+                field: auctionValidation.field
             })
         }
 
@@ -21,7 +22,8 @@ const addAuction = async (request, response) => {
         if(!itemValidation.isAccepted) {
             return response.status(406).json({
                 success: itemValidation.isAccepted,
-                message: itemValidation.message
+                message: itemValidation.message,
+                field: itemValidation.field
             })
         }
 
@@ -34,7 +36,8 @@ const addAuction = async (request, response) => {
         if(auctionHallsList.length == 0) {
             return response.status(406).json({
                 success: false,
-                message: 'no auction hall with that Id'
+                message: 'no auction hall with that Id',
+                field: 'auctionHallId'
             })
         }
 
@@ -43,7 +46,8 @@ const addAuction = async (request, response) => {
         if(auctionHallItemsList.length != 0) {
             return response.status(406).json({
                 success: false,
-                message: 'already registered item with that name in your auction hall'
+                message: 'already registered item with that name in your auction hall',
+                field: 'itemName'
             })
         }
 
@@ -52,7 +56,8 @@ const addAuction = async (request, response) => {
         if(categoriesList.length == 0) {
             return response.status(406).json({
                 success: false,
-                message: 'category does not exist'
+                message: 'category does not exist',
+                field: 'itemCategory'
             })
         }
 
@@ -160,10 +165,11 @@ const getAuctions = async (request, response) => {
         return response.status(500).json({
             success: false,
             message: 'internal server error',
-
+            error: error.message
         })
     }
 }
+
 
 
 

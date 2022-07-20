@@ -15,7 +15,8 @@ const bidderSignUp = async (request, response) => {
         if(!validation.isAccepted) {
             return response.status(406).json({
                 success: validation.isAccepted,
-                message: validation.message
+                message: validation.message,
+                field: validation.field
             })
         }
 
@@ -26,7 +27,8 @@ const bidderSignUp = async (request, response) => {
         if(usedMail.length != 0)
             return response.status(406).json({
                 success: false,
-                message: 'email is already used'
+                message: 'email is already used',
+                field: 'email'
             })
 
         const bidderData = {
@@ -70,7 +72,8 @@ const bidderLogin = async (request, response) => {
         if(!loginValidation.isAccepted) {
             return response.status(406).json({
                 success: loginValidation.isAccepted,
-                message: loginValidation.message
+                message: loginValidation.message,
+                field: loginValidation.field
             })
         }
 
@@ -81,7 +84,8 @@ const bidderLogin = async (request, response) => {
         if(biddersList.length == 0) {
             return response.status(406).json({
                 success: false,
-                message: 'account does not exist'
+                message: 'account does not exist',
+                field: 'email'
             })
         }
 
@@ -90,7 +94,8 @@ const bidderLogin = async (request, response) => {
         if(!bcrypt.compareSync(password, bidder.password)) {
             return response.status(406).json({
                 success: false,
-                message: 'bad credentials'
+                message: 'bad credentials',
+                field: 'password'
             })
         }
 
@@ -124,7 +129,8 @@ const auctionHallSignUp = async (request, response) => {
         if(!validation.isAccepted) {
             return response.status(406).json({
                 success: validation.isAccepted,
-                message: validation.message
+                message: validation.message,
+                field: validation.field
             })
         }
 
@@ -134,7 +140,8 @@ const auctionHallSignUp = async (request, response) => {
         if(namesUsed.length != 0) {
             return response.status(406).json({
                 success: false,
-                message: 'auction hall name is required'
+                message: 'auction hall name is required',
+                field: 'auctionHallName'
             })
         }
 
@@ -142,7 +149,8 @@ const auctionHallSignUp = async (request, response) => {
         if(usedEmails.length != 0) {
             return response.status(406).json({
                 success: false,
-                message: 'email is already used'
+                message: 'email is already used',
+                field: 'email'
             })
         }
 
@@ -186,7 +194,8 @@ const auctionHallLogin = async (request, response) => {
         if(!loginValidation.isAccepted) {
             return response.status(406).json({
                 success: loginValidation.isAccepted,
-                message: loginValidation.message
+                message: loginValidation.message,
+                field: validation.field
             })
         }
 
@@ -197,7 +206,8 @@ const auctionHallLogin = async (request, response) => {
         if(auctionHallList.length == 0) {
             return response.status(406).json({
                 success: false,
-                message: 'account does not exist'
+                message: 'account does not exist',
+                field: 'email'
             })
         }
 
@@ -206,7 +216,8 @@ const auctionHallLogin = async (request, response) => {
         if(!bcrypt.compareSync(password, auctionHall.password)) {
             return response.status(406).json({
                 success: false,
-                message: 'bad credentials'
+                message: 'bad credentials',
+                field: 'password'
             })
         }
 

@@ -12,7 +12,8 @@ const addcategory = async (request, response) => {
         if(!validateCategory.isAccepted) {
             return response.status(406).json({
                 success: validateCategory.isAccepted,
-                message: validateCategory.message
+                message: validateCategory.message,
+                field: validateCategory.field
             })
         }
 
@@ -23,7 +24,8 @@ const addcategory = async (request, response) => {
         if(usedCategoriesList.length != 0) {
             return response.status(406).json({
                 success: false,
-                message: 'category name is already used'
+                message: 'category name is already used',
+                field: 'name'
             })
         }
 
