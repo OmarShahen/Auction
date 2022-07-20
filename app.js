@@ -2,6 +2,7 @@ const express = require('express')
 const logger = require('morgan')
 const config = require('./config/config')
 const database = require('./config/database')
+const cors = require('cors')
 
 
 const app = express()
@@ -9,6 +10,7 @@ const app = express()
 
 app.use(logger('dev'))
 app.use(express.json())
+app.use(cors())
 
 app.use('/api/v1/auth', require('./routes/auth'))
 app.use('/api/v1', require('./routes/auctions'))
