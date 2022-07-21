@@ -119,8 +119,12 @@ module.exports = io => {
                     message: `your bid must be at least ${MIN_NEW_BID}`
                 })
 
+                const bidderData = bidders[0]
+
                 const newBid = {
                     bidderId,
+                    bidderName: bidderData.username,
+                    bidderEmail: bidderData.email,
                     value: value
                 }
 
@@ -132,7 +136,6 @@ module.exports = io => {
                     { new: true }
                 )
                 
-                const bidderData = bidders[0]
                 bidderData.password = ''
 
                 return io.to(auctionId).emit('bid:success', {

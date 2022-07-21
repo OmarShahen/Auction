@@ -7,5 +7,7 @@ router.get('/auctions/:auctionId', (request, response) => auctionController.getA
 
 router.get('/auctions', (request, response) => auctionController.getAuctions(request, response))
 
+router.get('/auctions/:auctionId/bids', (request, response) => auctionController.getAuctionBids(request, response))
+
 
 module.exports = router

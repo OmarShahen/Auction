@@ -171,7 +171,41 @@ const getAuctions = async (request, response) => {
     }
 }
 
+const getAuctionBids = async (request, response) => {
+
+    try {
+
+        const { auctionId } = request.params
+
+        if(!utils.isObjectId(auctionId))
+            return response.status(406).json({
+                success: false,
+                message: 'invalid auction Id'
+            })
+
+        const auction = await AuctionModel
+        .aggregate([
+            {
+                $lookup: { from: 'users', localField: 'bids.bidderId', foreignField: '_id', as: 'bidder'  }
+            }
+        ])
+
+        return response.status(200).json({
+            success: true,
+            auction
+        })
+
+    } catch(error) {
+        console.error(error)
+        return response.status(500).json({
+            success: false,
+            message: 'internal server error',
+            error: error.message
+        })
+    }
+}
 
 
 
-module.exports = { addAuction, getAuction, getAuctions }
+
+module.exports = { addAuction, getAuction, getAuctions, getAuctionBids }
