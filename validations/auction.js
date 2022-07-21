@@ -3,13 +3,17 @@ const moment = require('moment')
 
 const auction = (auctionData) => {
 
-    const { auctionHallId, startingPrice, startDate, endDate, isPrivate } = auctionData
+    const { auctionHallId, startingPrice, startDate, endDate, biddingValue } = auctionData
 
     if(!auctionHallId) return { isAccepted: false, message: 'auction hall Id is required', field: 'auctionHallId' }
 
     if(!validator.isObjectId(auctionHallId)) return { isAccepted: false, message: 'invalid auction hall Id', field: 'auctionHallId' }
     
     if(!Number.isInteger(startingPrice)) return { isAccepted: false, message: 'starting price must be an integer', field: 'startingPrice' } 
+
+    if(!biddingValue) return { isAccepted: false, message: 'bidding value is required', field: 'biddingValue' }
+
+    if(!Number.isInteger(biddingValue)) return { isAccepted: false, message: 'bidding value must be an integer', field: 'biddingValue' }
 
     if(!startDate) return { isAccepted: false, message: 'auction start date is required', field: 'startDate' }
 

@@ -11,6 +11,7 @@ const auctionSchema = new Schema({
     startingPrice: { type: Number, required: true },
     currentPrice: { type: Number },
     currentBid: { type: Number, default: 0 },
+    biddingValue: { type: Number, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     isPrivate: { type: Boolean, default: false },

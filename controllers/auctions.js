@@ -27,7 +27,7 @@ const addAuction = async (request, response) => {
             })
         }
 
-        const { auctionHallId, startingPrice, startDate, endDate, isPrivate } = request.body
+        const { auctionHallId, startingPrice, startDate, endDate, isPrivate, biddingValue } = request.body
 
         const { itemName, itemDescription, itemCategory, imageURL } = request.body
 
@@ -64,6 +64,7 @@ const addAuction = async (request, response) => {
         const newAuctionData = {
             auctionHallId,
             startingPrice,
+            biddingValue,
             startDate,
             endDate,
             isPrivate,
